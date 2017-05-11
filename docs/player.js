@@ -3,15 +3,18 @@ const CHOKI = 1;
 const PA =2;
 
 let matches = 0;
-function action(oppornent){
+
+function actionAgainstOmoteUra2(oppornent){
   matches = matches + 1;
-  const amari = matches %2; 
-  const isEven = amari ==0; //Trueは試合数が偶数
-  //console.log(amari); //(amari)偶数か奇数かわかる
-  console.log(`${matches} % 2 = ${amari} : ${isEven}`);
-  if(isEven){//Trueの時(偶数の時)はGUを返す
-    return GU;
+  const amari = matches % 3; 
+  const unsual = amari == 0;
+  if(unsual){
+    return CHOKI;
   }
-  return PA;
+  return GU;
 }
 
+function action(oppornent){
+  let result = actionAgainstOmoteUra2();
+  return result;
+}
