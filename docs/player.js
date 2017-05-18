@@ -10,13 +10,15 @@ function actionChokiLover(){
 }
 
 //表裏
-function actionOmoteUra(){
+function actionOmoteUra(){ //勝てない(泣)
   matches = matches + 1;
   const amari = matches % 2 == 0;
   if(amari){
-    return GU;
+    result = GU;
+  } else {
+    result = PA;
   }
-  return PA;
+   return result;
 }
 
 
@@ -25,7 +27,26 @@ function actionOmoteUra2(){
   matches = matches + 1;
   const amari = matches % 3 == 0;
   if(amari){
-    return CHOKI;
+    result = CHOKI;
+  } else {
+    result = GU;
+  }
+  return result;
+}
+
+//順番に出していくマン
+function actionRotation(){
+  matches = matches + 1;
+  const toReturnChoki = matches % 3 == 0;
+  const toReturnPa = matches % 3 == 2; //なんで2？
+  let result = GU;
+
+  if (toReturnChoki){
+    result = CHOKI;
+  } else if(toReturnPa) {
+    result = PA;
+  } else {
+    result = GU;
   }
   return result;
 }
@@ -34,6 +55,7 @@ function actionOmoteUra2(){
 チョキ大好きマン:　fighter::choki-lover
 表か裏かマン: fighter::odd-even
 帰ってきた表か裏かマン: fighter::on-third
+順番に出していくマン: "fighter::rotation"
 */
 
 function action(oppornent){
@@ -46,6 +68,8 @@ function action(oppornent){
     result = actionOmoteUra();
   } else if(oppornent == "fighter::on-third"){
     result = actionOmoteUra2();
+  } else if(oppornent == "fighter::rotation"){
+    result = actionRotation();
   }
   return result;
 }
